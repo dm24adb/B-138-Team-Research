@@ -31,3 +31,28 @@ plot_score <- ggplot(cwur15, aes(x = score)) +
     y = "Number of Universities"
   ) +
   theme_clean
+plot_score
+ggsave("Plot2_Histogram_Score_2015.png", plot_score, width = 8, height = 5, dpi = 500)
+
+plot_score <- ggplot(cwur15, aes(x = score)) +
+  geom_histogram(bins = 35, fill = "#179e72", colour = "black", alpha = 0.85) +
+  labs(
+    title = "Distribution of Overall CWUR Score (2015)",
+    x = "Overall CWUR Score",
+    y = "Number of Universities"
+  ) +
+  theme_clean
+
+plot_score
+ggsave("Plot2_Histogram_Score_2015.png", plot_score, width = 8, height = 5, dpi = 500)
+
+plot_scatter <- ggplot(cwur15, aes(x = publications, y = score)) +
+  geom_point(size = 2.2, alpha = 0.65, colour = "#0b4f9f") +
+  geom_smooth(method = "lm", se = TRUE, colour = "#d11149", linewidth = 1) +
+  labs(
+    title = "Relationship Between Publications and Overall CWUR Score (2015)",
+    subtitle = "Each point represents a university | Trend shown using linear regression",
+    x = "Number of Publications",
+    y = "Overall CWUR Score"
+  ) +
+  theme_clean
