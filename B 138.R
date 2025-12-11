@@ -56,3 +56,19 @@ plot_scatter <- ggplot(cwur15, aes(x = publications, y = score)) +
     y = "Overall CWUR Score"
   ) +
   theme_clean
+plot_scatter
+ggsave("Plot3_Scatter_Publications_vs_Score_2015.png", plot_scatter, width = 8.5, height = 5.5, dpi = 550)
+
+library(ggrepel)
+
+top_unis <- cwur15 %>% arrange(desc(publications)) %>% slice(1:5)
+
+plot_scatter_labeled <- plot_scatter +
+  geom_text_repel(data = top_unis, aes(label = institution), size = 3.2)
+
+plot_scatter_labeled
+ggsave("Plot4_Scatter_Labeled_Outliers.png", plot_scatter_labeled, width = 8.5, height = 5.5, dpi = 550)
+
+correlation_test <- cor.test(cwur15$publications, cwur15$score, method = "pearson")
+
+correlation_test
